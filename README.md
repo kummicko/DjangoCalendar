@@ -1,4 +1,5 @@
 # Django calendar
+![Screenshot_20230222_220500](https://user-images.githubusercontent.com/80746386/220759311-21753b6e-06cd-46e1-b49d-4d312b7e66c7.png)
 
 Simple django calendar.  
 Database included.  
