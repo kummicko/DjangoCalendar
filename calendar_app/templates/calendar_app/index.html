@@ -1,0 +1,47 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="{% static '/css/index.css' %}">
+    <title>Document</title>
+</head>
+<body>
+    <div class="head">
+        <h1>{{ month_name }}&nbsp;{{ year }}</h1>
+    </div>
+    <ul>
+        <div class="calendar">
+            {% for day in day_names %}
+            <li class="day_names">
+                {{ day }}
+            </li>    
+            {% endfor %}
+            {% for day in days %}
+                <li>
+                    <div class="cell">
+                        {% if day.0|date:'M' != month_name|slice:':3' %}
+                            <p class="greyed_paragraph">{{ day.0|date:'j' }}</p>
+                        {% else %}
+                            <span class="bold_paragraph">{{ day.0|date:'d' }}</span>
+                            {% if day.1|length > 0 %}
+                            <span class="event-counter">{{ day.1|length }}</span>
+                            <div class="tooltip">
+                                {% for event in day.1 %}
+                                    <p>{{ event.title }}</p>
+                                    <p>{{ event.description }}</p>
+                                    <p>{{ event.start_time|time:"H:i" }} ->{{ event.end_time|time:"H:i" }}</p>
+                                {% endfor %}
+                            </div>
+                            {% endif %}
+                        {% endif %}
+                    </div>
+                </li>
+            {% endfor %}
+        </div>
+    </ul>
+    <script src="{% static '/js/index.js' %}"></script>
+</body>
+</html>
